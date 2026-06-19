@@ -1,0 +1,19 @@
+.promos-header { background: linear-gradient(180deg, #1a0800 0%, var(--bg) 100%); padding: 60px 0 40px; }
+.promos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 80px; }
+.promo-full-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-top: 4px solid var(--c);
+  border-radius: var(--radius); padding: 28px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: all 0.25s;
+}
+.promo-full-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.promo-full-top { display: flex; justify-content: space-between; align-items: center; }
+.promo-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--c); background: rgba(255,255,255,0.06); padding: 3px 10px; border-radius: 20px; }
+.promo-big-emoji { font-size: 36px; }
+.promo-full-card h3 { font-size: 18px; font-weight: 800; }
+.promo-full-card p { font-size: 14px; color: var(--text2); line-height: 1.6; flex: 1; }
+.promo-code-box { display: flex; align-items: center; gap: 8px; background: var(--bg4); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+.promo-code-box strong { font-family: monospace; font-size: 16px; color: var(--accent); letter-spacing: 1px; }
+@media (max-width: 1024px) { .promos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .promos-grid { grid-template-columns: 1fr; } }

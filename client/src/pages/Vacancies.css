@@ -1,0 +1,103 @@
+.vac-hero {
+  background: linear-gradient(180deg, #041a08 0%, var(--bg) 100%);
+  padding: 60px 0 48px;
+}
+.vac-lead {
+  color: var(--text2); font-size: 18px; line-height: 1.7;
+  max-width: 600px; margin-top: 16px;
+}
+.vac-stats {
+  display: flex; align-items: center; gap: 24px; margin-top: 32px;
+}
+.vac-stat { display: flex; flex-direction: column; }
+.vac-stat strong { font-size: 28px; font-weight: 900; color: var(--accent); }
+.vac-stat span { font-size: 13px; color: var(--text3); }
+.vac-stat-div { width: 1px; height: 40px; background: var(--border2); }
+
+/* Perks */
+.vac-perks-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.vac-perk-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  transition: all 0.25s;
+}
+.vac-perk-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.vac-perk-emoji { font-size: 40px; margin-bottom: 14px; }
+.vac-perk-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.vac-perk-card p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+/* Vacancy cards */
+.vac-list { display: flex; flex-direction: column; gap: 12px; }
+.vac-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: border-color 0.2s;
+}
+.vac-card:hover, .vac-card.open { border-color: rgba(0,200,83,0.35); }
+
+.vac-card-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; cursor: pointer;
+}
+.vac-card-header:hover { background: rgba(255,255,255,0.02); }
+.vac-card-emoji { font-size: 36px; flex-shrink: 0; }
+.vac-card-main { flex: 1; min-width: 0; }
+.vac-card-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+.vac-card-title { font-size: 18px; font-weight: 700; }
+.vac-tag {
+  font-size: 11px; font-weight: 700; padding: 3px 10px;
+  border-radius: 20px; white-space: nowrap;
+}
+.vac-card-meta {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  font-size: 13px; color: var(--text2);
+}
+.vac-chevron {
+  font-size: 13px; color: var(--text3);
+  transition: transform 0.2s; flex-shrink: 0;
+}
+.vac-chevron.up { transform: rotate(180deg); color: var(--accent); }
+
+.vac-card-body {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.vac-desc { color: var(--text2); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+
+.vac-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; }
+.vac-details-grid h4, .vac-benefits h4 {
+  font-size: 14px; font-weight: 700; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+.vac-details-grid ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.vac-details-grid ul li {
+  font-size: 14px; color: var(--text2); line-height: 1.5;
+  padding-left: 18px; position: relative;
+}
+.vac-details-grid ul li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--accent); font-weight: 700;
+}
+
+.vac-benefits { margin-bottom: 20px; }
+.vac-benefits-list { display: flex; gap: 10px; flex-wrap: wrap; }
+.vac-benefit-chip {
+  background: rgba(0,200,83,0.1); border: 1px solid rgba(0,200,83,0.25);
+  color: var(--accent); font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 20px;
+}
+
+@media (max-width: 900px) {
+  .vac-perks-grid { grid-template-columns: repeat(2, 1fr); }
+  .vac-details-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .vac-perks-grid { grid-template-columns: 1fr; }
+  .vac-card-header { flex-wrap: wrap; }
+  .vac-card-meta { flex-direction: column; gap: 4px; }
+  .vac-stats { flex-wrap: wrap; }
+}

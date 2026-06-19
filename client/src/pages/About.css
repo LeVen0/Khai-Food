@@ -1,0 +1,17 @@
+.about-hero { background: linear-gradient(180deg, #1a0800 0%, var(--bg) 100%); padding: 60px 0 40px; }
+.about-lead { color: var(--text2); font-size: 18px; line-height: 1.7; max-width: 600px; margin-top: 16px; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-text h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
+.about-text p { color: var(--text2); font-size: 16px; line-height: 1.8; margin-bottom: 16px; }
+.about-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.about-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; text-align: center; }
+.about-stat strong { display: block; font-size: 40px; font-weight: 900; color: var(--accent); }
+.about-stat span { color: var(--text2); font-size: 14px; }
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.team-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 20px; text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; transition: all 0.25s; }
+.team-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.team-avatar { font-size: 56px; margin-bottom: 4px; }
+.team-card strong { font-size: 16px; }
+.team-card span { color: var(--text2); font-size: 13px; }
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .team-grid { grid-template-columns: 1fr; } }
