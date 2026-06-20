@@ -10,11 +10,22 @@ router.get('/', (req, res) => {
 
   if (category) { query += ' AND c.slug = ?'; params.push(category); }
   if (popular === 'true') { query += ' AND p.is_popular = 1'; }
-  if (search) { query += ' AND (p.name LIKE ? OR p.description LIKE ?)'; params.push(`%${search}%`, `%${search}%`); }
   query += ' ORDER BY p.is_popular DESC, p.id ASC';
-  if (limit) { query += ' LIMIT ?'; params.push(parseInt(limit)); }
 
-  res.json(db.prepare(query).all(...params));
+  let rows = db.prepare(query).all(...params);
+
+  // Пошук — у JS, бо SQLite LIKE не враховує регістр для кирилиці
+  if (search && search.trim()) {
+    const q = search.trim().toLowerCase();
+    rows = rows.filter(p =>
+      (p.name && p.name.toLowerCase().includes(q)) ||
+      (p.description && p.description.toLowerCase().includes(q))
+    );
+  }
+
+  if (limit) rows = rows.slice(0, parseInt(limit));
+
+  res.json(rows);
 });
 
 router.get('/:id', (req, res) => {

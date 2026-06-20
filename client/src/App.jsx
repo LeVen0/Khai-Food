@@ -31,8 +31,10 @@ function Layout({ children }) {
     <>
       <Navbar />
       <CartDrawer />
-      {children}
-      <Footer />
+      <div className="app-shell">
+        {children}
+        <Footer />
+      </div>
     </>
   );
 }

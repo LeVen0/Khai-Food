@@ -32,6 +32,9 @@
 }
 .cat-tab span { font-size: 16px; }
 
+/* Резерв висоти, щоб під час завантаження/пошуку область не схлопувалась і футер не стрибав */
+.menu-results { min-height: 60vh; }
+
 .menu-grid {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 20px; padding-bottom: 80px;

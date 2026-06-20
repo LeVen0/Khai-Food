@@ -139,6 +139,12 @@ describe('IT-07 — IT-09: Каталог товарів', () => {
     assert.ok(r.data.every(p => p.category_slug === 'burgers'), 'Всі товари з категорії burgers');
   });
 
+  test('IT-08b: GET /products?search — пошук кирилицею без урахування регістру', async () => {
+    const r = await api('/products?search=гава');   // малими, товар «Гавайська»
+    assert.equal(r.status, 200);
+    assert.ok(r.data.some(p => /гавайська/i.test(p.name)), 'Знайдено «Гавайська» за запитом «гава»');
+  });
+
   test('IT-09: GET /categories — список категорій', async () => {
     const r = await api('/categories');
     assert.equal(r.status, 200);
