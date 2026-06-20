@@ -20,6 +20,16 @@ export default function AdminUsers() {
     (u.phone || '').includes(search)
   );
 
+  const removeUser = async (u) => {
+    if (!confirm(`Видалити користувача ${u.email}? Його замовлення та бонуси також буде видалено.`)) return;
+    try {
+      await adminApi().delete(`/users/${u.id}`);
+      setUsers(prev => prev.filter(x => x.id !== u.id));
+    } catch (e) {
+      alert(e.response?.data?.error || 'Помилка видалення');
+    }
+  };
+
   return (
     <div>
       <div className="admin-section-header">
@@ -46,6 +56,7 @@ export default function AdminUsers() {
                 <th>Рівень</th>
                 <th>Бонуси</th>
                 <th>Дата реєстрації</th>
+                <th>Дії</th>
               </tr>
             </thead>
             <tbody>
@@ -65,6 +76,19 @@ export default function AdminUsers() {
                   </td>
                   <td style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>
                     {formatDate(u.created_at)}
+                  </td>
+                  <td>
+                    {u.email === 'demo@fastfood.ua' ? (
+                      <span style={{ color: 'rgba(255,255,255,0.25)', fontSize: 12 }}>демо</span>
+                    ) : (
+                      <button
+                        onClick={() => removeUser(u)}
+                        title="Видалити користувача"
+                        style={{ background: 'rgba(229,115,115,0.12)', border: 'none', color: '#e57373',
+                          borderRadius: 6, padding: '5px 10px', cursor: 'pointer', fontSize: 13 }}>
+                        🗑
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

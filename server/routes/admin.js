@@ -183,4 +183,19 @@ router.get('/users', adminAuth, (req, res) => {
   res.json(users);
 });
 
+// Видалення користувача разом із його замовленнями та бонусами
+router.delete('/users/:id', adminAuth, (req, res) => {
+  const id = +req.params.id;
+  const user = db.prepare('SELECT email FROM users WHERE id=?').get(id);
+  if (!user) return res.status(404).json({ error: 'Користувача не знайдено' });
+  if (user.email === 'demo@fastfood.ua') return res.status(400).json({ error: 'Демо-акаунт видалити не можна' });
+
+  db.prepare('DELETE FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE user_id=?)').run(id);
+  db.prepare('DELETE FROM orders WHERE user_id=?').run(id);
+  db.prepare('DELETE FROM bonus_transactions WHERE user_id=?').run(id);
+  db.prepare('DELETE FROM email_codes WHERE email=?').run(user.email);
+  db.prepare('DELETE FROM users WHERE id=?').run(id);
+  res.json({ message: 'Користувача видалено' });
+});
+
 export default router;

@@ -319,6 +319,26 @@ describe('IT-16 — IT-18: Адміністративний API', () => {
     await adminApi(`/admin/promo/${r.data.id}`, { method: 'DELETE' });
   });
 
+  test('IT-29: DELETE /admin/users/:id — видалення користувача', async () => {
+    const email = `del_${Date.now()}@khai.test`;
+    await api('/auth/register', { method: 'POST', body: { name: 'Видалити Мене', email, phone: '+380501112233', password: TEST_PASS } });
+    const list = await adminApi('/admin/users');
+    const u = list.data.find(x => x.email === email);
+    assert.ok(u, 'Користувач створений');
+    const del = await adminApi(`/admin/users/${u.id}`, { method: 'DELETE' });
+    assert.equal(del.status, 200);
+    const after = await adminApi('/admin/users');
+    assert.ok(!after.data.some(x => x.email === email), 'Користувача видалено зі списку');
+  });
+
+  test('IT-30: DELETE /admin/users/:id — демо-акаунт видалити не можна', async () => {
+    const list = await adminApi('/admin/users');
+    const demo = list.data.find(x => x.email === 'demo@fastfood.ua');
+    if (!demo) return; // демо може бути відсутнім у деяких базах
+    const del = await adminApi(`/admin/users/${demo.id}`, { method: 'DELETE' });
+    assert.equal(del.status, 400);
+  });
+
 });
 
 // ── IT-22 — IT-26: Email-верифікація та пароль ────────────────────────────────
